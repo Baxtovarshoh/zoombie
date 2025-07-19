@@ -1,0 +1,169 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+@font-face {
+  font-family: "AlbertusNova";
+  src: url("../assets/fonts/albertusnova.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  height: 100vh;
+  background-color: #222;
+}
+.phone {
+  border-radius: 50px;
+  border: 7px solid black;
+  background: white;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  position: fixed;
+  color: #fff;
+  width: 360px;
+  height: 700px;
+}
+.screen {
+  width: 100%;
+  height: 100%;
+  border-radius: 30px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.notch {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  z-index: 1;
+  transform: translateX(-50%);
+  width: 135px;
+  height: 30px;
+  background: black;
+  border-radius: 15px;
+}
+.swipe {
+  width: 120px;
+  height: 6px;
+  background: #89898981;
+  position: absolute;
+  bottom: 7px;
+  border-radius: 5px;
+  right: 50%;
+  transform: translateX(50%);
+}
+.first {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 40px;
+  background: url("../assets/v.png") top/cover no-repeat;
+}
+.container {
+  width: 100%;
+  display: flex;
+  height: 32%;
+  align-items: center;
+  padding: 0 20px;
+  position: relative;
+  justify-content: space-between;
+}
+.day {
+  width: 45%;
+}
+.vam {
+  width: 40%;
+  height: 55%;
+}
+.text {
+  font-size: 20px;
+  width: 70%;
+  text-transform: uppercase;
+  text-align: center;
+  font-family: "AlbertusNova";
+}
+.names {
+  position: absolute;
+  font-size: 6px;
+  left: 19.5%;
+  font-family: "AlbertusNova";
+}
+.names2 {
+  position: absolute;
+  font-family: "AlbertusNova";
+  font-size: 6px;
+  right: 22%;
+}
+
+.cont-persons {
+  width: 100%;
+  height: 35.3%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background: linear-gradient(to top, #000000 30%, #feb47b00);
+}
+.person {
+  width: 33%;
+  position: absolute;
+  height: 100%;
+}
+.d {
+  width: 90%;
+  height: 120%;
+  position: absolute;
+  top: -100px;
+}
+.logo{
+  width: 100%;
+  position: absolute;
+  bottom: 20%;
+  height: 54%;
+}
+.tune{
+  width: 40%;
+  position: absolute;
+  bottom: 0%;
+  height: 20%;
+}
+
+.liza{
+  width: 20%;
+  height: 100%;
+  position: absolute;
+  left: 25px;
+  bottom: 30%;
+}
+.mula{
+  width: 20%;
+  height: 100%;
+  position: absolute;
+  left: 28%;
+  bottom: 40%;
+}
+.endi{
+  width: 20%;
+  height: 100%;
+  position: absolute;
+  left: 47%;
+  bottom: 29%;
+}
+.mark{
+  width: 22%;
+  height: 100%;
+  position: absolute;
+  left: 72%;
+  bottom: 29%;
+}
+
+.hidden {
+  display: none;
+}
