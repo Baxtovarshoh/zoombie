@@ -115,6 +115,7 @@ body {
   width: 33%;
   position: absolute;
   height: 100%;
+  z-index: 3;
 }
 .d {
   width: 90%;
@@ -122,47 +123,239 @@ body {
   position: absolute;
   top: -100px;
 }
-.logo{
+.logo {
   width: 100%;
   position: absolute;
   bottom: 20%;
   height: 54%;
 }
-.tune{
+.tune {
   width: 40%;
   position: absolute;
   bottom: 0%;
   height: 20%;
 }
 
-.liza{
+.liza {
   width: 20%;
   height: 100%;
   position: absolute;
   left: 25px;
   bottom: 30%;
 }
-.mula{
+.mula {
   width: 20%;
   height: 100%;
   position: absolute;
   left: 28%;
   bottom: 40%;
 }
-.endi{
+.endi {
   width: 20%;
   height: 100%;
   position: absolute;
   left: 47%;
   bottom: 29%;
 }
-.mark{
+.mark {
   width: 22%;
   height: 100%;
   position: absolute;
   left: 72%;
   bottom: 29%;
 }
+.game-start {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.l2 {
+  background: url("../assets/1-first/bg1.png") top/cover no-repeat;
+}
+.l3 {
+  background: url("../assets/1-first/bg2.png") top/cover no-repeat;
+}
+.person-cont {
+  width: 100%;
+  height: 15%;
+  position: absolute;
+  bottom: 0%;
+  display: flex;
+  font-family: "AlbertusNova";
+  text-transform: uppercase;
+  line-height: 1;
+  padding: 0 10px;
+}
+.person1 {
+  width: 50%;
+  text-transform: uppercase;
+  display: flex;
+  color: orange;
+}
+.text-pr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+}
+.cont-pr {
+  width: 50%;
+}
+.player {
+  position: absolute;
+  left: 50px;
+  top: -5px;
+  width: 30%;
+}
+.person2 {
+  width: 50%;
+  display: flex;
+  color: #2b00ec;
+}
+
+.bot {
+  position: absolute;
+  right: 45px;
+  top: -5px;
+  width: 30%;
+}
+
+.w {
+  font-size: 9px;
+}
+.score {
+  margin-top: 6px;
+  font-size: 34px;
+  font-weight: 900;
+}
+.timer-cont {
+  text-align: center;
+  font-size: 19px;
+}
+.q {
+  font-size: 21px;
+}
+.platform {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: all 0.5 ease-in;
+}
+.daywalker {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  left: 0;
+  top: 40%;
+  background: url("../assets/icon.png") top/cover no-repeat;
+}
+
+.vampire {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  right: 0;
+  top: 40%;
+  background: url("../assets/vapIcon.png") top/cover no-repeat;
+}
+.daywalker,
+.vampire {
+  transition: all 0.3s ease;
+  z-index: 12;
+  pointer-events: none;
+}
+.point {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.point > img {
+  width: 50%;
+  height: 50%;
+}
+.end-card {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background: url("../assets/1-first/7.png") center/cover no-repeat;
+}
+
+.play-now,
+.slka {
+  width: 150px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 700;
+  color: #9088b4;
+  font-family: "AlbertusNova";
+  position: relative;
+  &:active {
+    transform: translateY(1px);
+  }
+  & > img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 0;
+  }
+  & > span {
+    position: relative;
+    z-index: 0;
+  }
+}
+.f {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30%;
+
+  & > .s {
+    font-size: 70px;
+  }
+}
+.e {
+  display: flex;
+  line-height: 1;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 16px;
+  text-align: end;
+  flex-direction: column;
+  & .e > span {
+    font-size: 40px;
+    color: #6a46fb;
+  }
+}
+.for-score {
+  width: 100%;
+  height: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  font-family: "AlbertusNova";
+  justify-content: center;
+}
+.buttons {
+  width: 100%;
+  height: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 13px;
+}
+
 
 .hidden {
   display: none;

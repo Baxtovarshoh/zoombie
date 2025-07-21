@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="css/index.css" />
+
+    <script src="js/index.js" defer></script>
   </head>
   <body>
     <div class="phone">
@@ -25,16 +27,70 @@
           </div>
           <div class="cont-persons">
             <img class="d" src="assets/1-first/People copy 3.png" alt="" />
-            <div class="person liza"></div>
-            <div class="person mula"></div>
-            <div class="person endi"></div>
-            <div class="person mark"></div>
+            <div onclick="ChoosePerson('liza')" class="person liza"></div>
+            <div onclick="ChoosePerson('mula')" class="person mula"></div>
+            <div onclick="ChoosePerson('endi')" class="person endi"></div>
+            <div onclick="ChoosePerson('mark')" class="person mark"></div>
             <img
               class="logo"
               src="assets/1-first/ZM4_LOGO_ACT574422 copy 2 (1).png"
               alt=""
             />
             <img class="tune" src="assets/tune.png" alt="" />
+          </div>
+        </div>
+        <div class="game-start hidden">
+          <div class="platform">
+            <div class="daywalker"></div>
+            <div class="vampire"></div>
+          </div>
+          <div class="person-cont">
+            <div class="person1">
+              <div class="text-pr">
+                <span class="w">DAYWALKERS</span>
+                <span class="re">Score</span>
+                <span id="scorePlayer" class="score">0</span>
+              </div>
+              <div class="cont-pr">
+                <img class="player" src="assets/1-first/liza.png" alt="" />
+              </div>
+            </div>
+            <div class="timer-cont">
+              <span>time</span>
+              <span class="q">0:<span class="st" id="time">14</span></span>
+            </div>
+            <div class="person2">
+              <div class="cont-pr">
+                <img class="bot" src="assets/1-first/mark.png" alt="" />
+              </div>
+              <div class="text-pr">
+                <span class="w">vampires</span>
+                <span class="re">Score</span>
+                <span id="scoreBot" class="score">0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="end-card">
+          <div class="for-score">
+            <span> Great Job </span>
+            <div class="f">
+              <span class="e">
+                Final
+                <span> Score </span>
+              </span>
+              <span id="scorePlayer" class="s">15</span>
+            </div>
+          </div>
+          <div class="buttons">
+            <div class="play-now">
+              <img src="assets/1-first/button.png" alt="" />
+              <span>PLAY NOW</span>
+            </div>
+            <a href="#" class="slka">
+              <img src="assets/1-first/button.png" alt="" />
+              <span>learn now</span>
+            </a>
           </div>
         </div>
       </div>
