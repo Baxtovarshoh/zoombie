@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/res.css" />
 
     <script src="js/index.js" defer></script>
   </head>
@@ -71,19 +72,19 @@
             </div>
           </div>
         </div>
-        <div class="end-card">
+        <div class="end-card hidden">
           <div class="for-score">
             <span> Great Job </span>
             <div class="f">
               <span class="e">
                 Final
-                <span> Score </span>
+                <span class="o"> Score </span>
               </span>
               <span id="scorePlayer" class="s">15</span>
             </div>
           </div>
           <div class="buttons">
-            <div class="play-now">
+            <div onclick="replay()" class="play-now">
               <img src="assets/1-first/button.png" alt="" />
               <span>PLAY NOW</span>
             </div>

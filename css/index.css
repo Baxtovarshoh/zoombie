@@ -332,7 +332,7 @@ body {
   font-size: 16px;
   text-align: end;
   flex-direction: column;
-  & .e > span {
+  & .o {
     font-size: 40px;
     color: #6a46fb;
   }

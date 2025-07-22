@@ -86,13 +86,14 @@ function spawnPoint() {
 
 function endGame() {
   stopSpawn();
+  gameBackground.classList.add("hidden");
   endCard.classList.remove("hidden");
-  gameBackground.classList.remove("hidden");
 }
 
 function stopSpawn() {
   clearInterval(spawnInterval);
-  point.remove();
+  const allPoints = platform.querySelectorAll(".point");
+  allPoints.forEach(p => p.remove());
 }
 
 function animatePoint(point) {
@@ -165,6 +166,10 @@ function animateCrosshair(who) {
   };
 
   setInterval(move, 1000);
+}
+function replay() {
+  startCont.classList.remove("hidden")
+  endCard.classList.add("hidden")
 }
 
 animateCrosshair(vampire);

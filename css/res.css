@@ -1,0 +1,8 @@
+@media (max-width: 400px) {
+    .phone{
+        width: 100%;
+        border: none;
+        border-radius: 0;
+    }
+    
+}
