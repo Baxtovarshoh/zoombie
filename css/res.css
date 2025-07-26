@@ -103,7 +103,7 @@
   }
   .l2,
   .l3 {
-    background: url("../assets/1-first/rt.png") top/cover no-repeat;
+    background: url("../assets/1-first/zomb_BG_H1.png") top/cover no-repeat;
   }
   .person1 {
     width: 25%;
@@ -112,7 +112,7 @@
   .player {
     width: 12%;
     clip-path: polygon(0 -9%, 216% -7%, 14% 53%);
-    left: 60px;
+    left: 50px;
     top: 5px;
   }
   .text-pr {
@@ -134,6 +134,7 @@
   .v {
     margin-left: 25px;
     width: 40%;
+    color: rgb(0, 217, 255);
   }
   .daywalker {
     left: 50px;

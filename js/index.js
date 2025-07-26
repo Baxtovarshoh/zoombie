@@ -73,6 +73,7 @@ window.addEventListener("DOMContentLoaded", () => {
   video.play();
 });
 window.addEventListener("resize", () => {
+  video.muted = true;
   if (windowH) {
     video.src = `assets/video/${pos.v[random]}.mp4`;
   } else {
@@ -129,8 +130,6 @@ function ChoosePerson(name) {
   gameBackground.classList.remove("hidden");
 
   startGame();
-  daywalker.style.right = "70px";
-  vampire.style.left = "70px";
 }
 
 function updateScores() {
