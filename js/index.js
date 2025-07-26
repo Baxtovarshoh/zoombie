@@ -25,7 +25,7 @@ allSourceVideo.forEach((file) => {
   const link = document.createElement("link");
   link.rel = "preload";
   link.as = "video";
-  link.href = `assets/video/${file}`;
+  link.href = `assets/video/${file}.mp4`; // добавляем расширение
   link.type = "video/mp4";
   document.head.appendChild(link);
 });
@@ -34,6 +34,7 @@ const video = document.querySelector(".vid");
 const gameBackground = document.querySelector(".game-start");
 const startCont = document.querySelector(".first");
 const endCard = document.querySelector(".end-card");
+const toggle = document.querySelector(".toggle");
 
 const daywalker = document.querySelector(".daywalker");
 const vampire = document.querySelector(".vampire");
@@ -48,8 +49,54 @@ let spawnInterval;
 let timers = 20;
 let botScore = 0;
 let playerScore = 0;
+let videoConte = video.parentElement;
+let mutetion = true;
+let unmute = (video.muted = mutetion);
+let windowH = window.innerHeight > 400;
+let random = Math.round(Math.random());
+
+video.play();
 
 timer.textContent = timers;
+
+const pos = {
+  v: ["3v", "1v"],
+  h: ["1", "3"],
+};
+
+window.addEventListener("DOMContentLoaded", () => {
+  if (windowH) {
+    video.src = `assets/video/${pos.v[random]}.mp4`;
+  } else {
+    video.src = `assets/video/${pos.h[random]}.mp4`;
+  }
+  video.play();
+});
+window.addEventListener("resize", () => {
+  if (windowH) {
+    video.src = `assets/video/${pos.v[random]}.mp4`;
+  } else {
+    video.src = `assets/video/${pos.h[random]}.mp4`;
+  }
+});
+video.addEventListener("ended", () => {
+  videoConte.classList.add("hidden");
+  video.pause();
+  startCont.classList.remove("hidden");
+});
+function clickVolume() {
+  if (unmute === true) {
+    video.muted = false;
+    unmute = false;
+    console.log("unmuted");
+    toggle.innerHTML = `<i class="bxr bx-volume-full"></i>`;
+  } else {
+    toggle.innerHTML = `<i class="bxr bx-volume-mute"></i>`;
+    video.muted = true;
+    unmute = true;
+    console.log("muted");
+  }
+}
 
 function ChoosePerson(name) {
   selectedPlayer = name;

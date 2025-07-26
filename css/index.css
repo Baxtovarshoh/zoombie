@@ -265,6 +265,28 @@ body {
   background: url("../assets/1-first/icon-vampire.png") top/cover no-repeat;
   left: 0;
 }
+.video{
+  width: 100%;
+  height: 100%;
+  background: #483f3f;
+}
+.vid{
+  width: 100%;
+  height: 100%;
+}
+.toggle{
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  top: 40px;
+  font-size: 30px;
+  left: 30px;
+  z-index: 10;
+}
 .point {
   width: 100px;
   height: 100px;
@@ -272,6 +294,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 11;
 }
 .point > img {
   width: 50%;
@@ -297,7 +320,7 @@ body {
   text-transform: uppercase;
   font-size: 12px;
   font-weight: 700;
-  color: #9088b4;
+  color: #84fffc;
   font-family: "AlbertusNova";
   position: relative;
   &:active {
@@ -335,7 +358,7 @@ body {
   flex-direction: column;
   & .o {
     font-size: 40px;
-    color: #6a46fb;
+    color: #00deff;
   }
 }
 .for-score {

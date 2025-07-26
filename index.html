@@ -6,17 +6,39 @@
     <title>Document</title>
     <link rel="stylesheet" href="css/index.css" />
     <link rel="stylesheet" href="css/res.css" />
-
+    <link rel="preload" as="image" href="assets/h.png" type="image/png" />
+    <link rel="preload" as="image" href="assets/v.png" type="image/png" />
+    <link rel="preload" as="image" href="assets/fruit.png" type="image/png" />
+    <link
+      href="https://cdn.boxicons.com/fonts/basic/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="preload"
+      as="image"
+      href="assets/daywalker.png"
+      type="image/png"
+    />
+    <link rel="preload" as="image" href="assets/vampire.png" type="image/png" />
     <script src="js/index.js" defer></script>
   </head>
   <body>
     <div class="phone">
       <div class="notch"></div>
       <div class="screen">
-        <div class="video hidden">
-          <video src="assets/video/" class="vid"></video>
+        <div class="video">
+          <span onclick="clickVolume()" class="toggle">
+            <i class="bxr bx-volume-mute"></i>
+          </span>
+          <video
+            src="assets/video/1v.mp4"
+            preload="auto"
+            muted
+            autoplay
+            class="vid"
+          ></video>
         </div>
-        <div class="first">
+        <div class="first hidden">
           <p class="text">
             Choose A side and HARVEST bloodfruitS to outscore the OPPOSING SIDE!
           </p>
@@ -42,7 +64,7 @@
             <img class="tune" src="assets/tune.png" alt="" />
           </div>
         </div>
-        <div class="game-start hidden">
+        <div class="game-start l3 hidden">
           <div class="platform">
             <div class="daywalker"></div>
             <div class="vampire"></div>
@@ -66,7 +88,7 @@
               <div class="cont-pr">
                 <img class="bot" src="assets/1-first/mark.png" alt="" />
               </div>
-              <div class="text-pr">
+              <div class="text-pr v">
                 <span class="w">vampires</span>
                 <span class="re">Score</span>
                 <span id="scoreBot" class="score vam">0</span>
