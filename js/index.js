@@ -1,53 +1,105 @@
+const allImage = [
+  "7.png",
+  "bg1.png",
+  "bg2.png",
+  "endi.png",
+  "endi2.png",
+  "icon-daywalker.png",
+  "icon-vampire.png",
+  "liza.png",
+  "logo.png",
+  "mark.png",
+  "mula.png",
+  "People copy 3png",
+];
+allImage.forEach((file) => {
+  const link = document.createElement("link");
+  link.rel = "preload";
+  link.as = "image";
+  link.href = `assets/1-first/${file}`;
+  link.type = "image/png";
+  document.head.appendChild(link);
+});
+const allSourceVideo = ["1", "2", "3", "4"];
+allSourceVideo.forEach((file) => {
+  const link = document.createElement("link");
+  link.rel = "preload";
+  link.as = "video";
+  link.href = `assets/video/${file}`;
+  link.type = "video/mp4";
+  document.head.appendChild(link);
+});
+
 const video = document.querySelector(".vid");
 const gameBackground = document.querySelector(".game-start");
 const startCont = document.querySelector(".first");
 const endCard = document.querySelector(".end-card");
-const point = document.querySelector(".point");
 
 const daywalker = document.querySelector(".daywalker");
 const vampire = document.querySelector(".vampire");
-const player = document.querySelector(".player");
-const bot = document.querySelector(".bot");
-const scorePlayer = document.querySelectorAll("#scorePlayer");
-const scoreBot = document.querySelectorAll("#scoreBot");
-const timer = document.querySelector("#time");
 const platform = document.querySelector(".platform");
+const timer = document.querySelector("#time");
+const scorePlayerEl = document.querySelectorAll(".days");
+const scoreBotEl = document.querySelectorAll(".vam");
 
-let masPlayer = [];
-let masBot = [];
-function ChoosePerson(name) {
-  if (name === "mark") {
-    player.src = `assets/1-first/${name}.png`;
-    bot.src = `assets/1-first/mula.png`;
-    gameBackground.classList.add("l3");
-  } else if (name === "mula") {
-    player.src = `assets/1-first/${name}.png`;
-    bot.src = `assets/1-first/endi.png`;
-    gameBackground.classList.remove("l2");
-    gameBackground.classList.add("l3");
-  } else if (name === "endi") {
-    player.src = `assets/1-first/${name}.png`;
-    bot.src = `assets/1-first/liza.png`;
-    gameBackground.classList.add("l2");
-  } else {
-    player.src = `assets/1-first/${name}.png`;
-    bot.src = `assets/1-first/mark.png`;
-    gameBackground.classList.add("l2");
-  }
-  startCont.classList.add("hidden");
-  gameBackground.classList.remove("hidden");
-  startGame();
-}
-
-let playerScore = 0;
-let botScore = 0;
-let botCaught = 0;
 let selectedPlayer = "daywalker";
 let timeInterval;
-let timers = 25;
 let spawnInterval;
+let timers = 20;
+let botScore = 0;
+let playerScore = 0;
 
 timer.textContent = timers;
+
+function ChoosePerson(name) {
+  selectedPlayer = name;
+  const botName = name === "daywalker" ? "vampire" : "daywalker";
+
+  daywalker.classList.remove("bot-crosshair");
+  vampire.classList.remove("bot-crosshair");
+
+  if (selectedPlayer === "daywalker") {
+    playerScoreDisplay = scorePlayerEl;
+    botScoreDisplay = scoreBotEl;
+  } else {
+    playerScoreDisplay = scoreBotEl;
+    botScoreDisplay = scorePlayerEl;
+  }
+
+  if (botName === "daywalker") {
+    daywalker.classList.add("bot-crosshair");
+    gameBackground.classList.add("l3");
+  } else {
+    vampire.classList.add("bot-crosshair");
+    gameBackground.classList.add("l2");
+  }
+  botScore = 0;
+  playerScore = 0;
+  updateScores();
+
+  startCont.classList.add("hidden");
+  endCard.classList.add("hidden");
+  gameBackground.classList.remove("hidden");
+
+  startGame();
+  daywalker.style.right = "70px";
+  vampire.style.left = "70px";
+}
+
+function updateScores() {
+  console.log("👤 playerScoreDisplay", playerScoreDisplay);
+  console.log("📊 botScoreDisplay", botScoreDisplay);
+
+  console.log("playerScore = ", playerScore);
+  console.log("botScore = ", botScore);
+  playerScoreDisplay.forEach((e) => {
+    e.textContent = playerScore;
+  });
+  botScoreDisplay.forEach((e) => {
+    e.textContent = botScore;
+  });
+}
+
 function startGame() {
   spawnInterval = setInterval(spawnPoint, 1000);
   timeInterval = setInterval(() => {
@@ -56,15 +108,9 @@ function startGame() {
       timer.textContent = timers;
     } else {
       endGame();
-      console.log("end");
-
       clearInterval(timeInterval);
     }
   }, 1000);
-}
-function changeScore(value, pla) {
-  let who = value === "bot" ? scoreBot : scorePlayer;
-  who.forEach((e) => (e.textContent = pla));
 }
 
 function spawnPoint() {
@@ -84,18 +130,6 @@ function spawnPoint() {
   botTryCatch(point);
 }
 
-function endGame() {
-  stopSpawn();
-  gameBackground.classList.add("hidden");
-  endCard.classList.remove("hidden");
-}
-
-function stopSpawn() {
-  clearInterval(spawnInterval);
-  const allPoints = platform.querySelectorAll(".point");
-  allPoints.forEach(p => p.remove());
-}
-
 function animatePoint(point) {
   let top = -70;
   const fall = setInterval(() => {
@@ -111,7 +145,6 @@ function animatePoint(point) {
 
 function moveTargetTo(x, y, who) {
   const rect = platform.getBoundingClientRect();
-
   const relativeX = x - rect.left;
   const relativeY = y - rect.top;
 
@@ -120,34 +153,40 @@ function moveTargetTo(x, y, who) {
 }
 
 platform.addEventListener("click", (e) => {
-  if (e.target.closest(".point")) {
-    const point = e.target.closest(".point");
+  const point = e.target.closest(".point");
+  if (point) {
     const rect = point.getBoundingClientRect();
+    const playerTarget = vampire.classList.contains("bot-crosshair")
+      ? daywalker
+      : vampire;
 
-    const target = selectedPlayer === "daywalker" ? daywalker : vampire;
-    moveTargetTo(rect.left, rect.top, target);
+    moveTargetTo(rect.x, rect.y, playerTarget);
 
     point.remove();
     playerScore++;
-    changeScore("player", playerScore);
+    updateScores();
   }
 });
 
+let botCaughtCount = 0;
+
 function botTryCatch(point) {
-  if (botCaught > 2) return;
+  const delay = Math.random() * 2000 + 1000;
 
-  const delay = Math.random() * 5000 + 3000;
   setTimeout(() => {
-    if (document.body.contains(point)) {
-      const rect = point.getBoundingClientRect();
-      const target = selectedPlayer === "daywalker" ? vampire : daywalker;
-      moveTargetTo(rect.left, rect.top, target);
+    if (!document.body.contains(point)) return;
 
-      point.remove();
-      botScore++;
-      botCaught++;
-      changeScore("bot", botScore);
+    const rect = point.getBoundingClientRect();
+    const botTarget = document.querySelector(".bot-crosshair");
+    moveTargetTo(rect.x, rect.y, botTarget);
+
+    if (botCaughtCount < 3) {
+      point.remove(); // бот удаляет фрукт
+      botScore++; // и получает очко
+      botCaughtCount++;
+      updateScores();
     }
+    // иначе: просто двигается, но не ловит
   }, delay);
 }
 
@@ -155,8 +194,8 @@ function animateCrosshair(who) {
   const move = () => {
     const platformRect = platform.getBoundingClientRect();
 
-    const maxX = platform.offsetWidth - 100;
-    const maxY = platform.offsetHeight - 100;
+    const maxX = platformRect.width - 80;
+    const maxY = platformRect.height - 80;
 
     const x = Math.random() * maxX;
     const y = Math.random() * maxY;
@@ -167,11 +206,32 @@ function animateCrosshair(who) {
 
   setInterval(move, 1000);
 }
-function replay() {
-  startCont.classList.remove("hidden")
-  endCard.classList.add("hidden")
+
+function endGame() {
+  clearInterval(timeInterval);
+  clearInterval(spawnInterval);
+  const allPoints = platform.querySelectorAll(".point");
+  allPoints.forEach((p) => p.remove());
+
+  gameBackground.classList.add("hidden");
+  endCard.classList.remove("hidden");
 }
 
-animateCrosshair(vampire);
-daywalker.style.position = "absolute";
-vampire.style.position = "absolute";
+function replay() {
+  clearInterval(timeInterval);
+  clearInterval(spawnInterval);
+
+  timers = 20;
+  timer.textContent = timers;
+
+  botScore = 0;
+  playerScore = 0;
+  botCaughtCount = 0;
+  updateScores();
+
+  const allPoints = platform.querySelectorAll(".point");
+  allPoints.forEach((p) => p.remove());
+
+  endCard.classList.add("hidden");
+  startCont.classList.remove("hidden");
+}

@@ -21,22 +21,24 @@
             Choose A side and HARVEST bloodfruitS to outscore the OPPOSING SIDE!
           </p>
           <div class="container">
-            <img class="day" src="assets/daywalker.png" alt="" />
-            <img class="vam" src="assets/vampire.png" alt="" />
+            <img
+              onclick="ChoosePerson('daywalker')"
+              class="day"
+              src="assets/daywalker.png"
+              alt=""
+            />
+            <img
+              onclick="ChoosePerson('vampire')"
+              class="vam"
+              src="assets/vampire.png"
+              alt=""
+            />
             <span class="names">DAYWALKERS</span>
             <span class="names2">VAMPIRES</span>
           </div>
           <div class="cont-persons">
             <img class="d" src="assets/1-first/People copy 3.png" alt="" />
-            <div onclick="ChoosePerson('liza')" class="person liza"></div>
-            <div onclick="ChoosePerson('mula')" class="person mula"></div>
-            <div onclick="ChoosePerson('endi')" class="person endi"></div>
-            <div onclick="ChoosePerson('mark')" class="person mark"></div>
-            <img
-              class="logo"
-              src="assets/1-first/ZM4_LOGO_ACT574422 copy 2 (1).png"
-              alt=""
-            />
+            <img class="logo" src="assets/1-first/logo.png" alt="" />
             <img class="tune" src="assets/tune.png" alt="" />
           </div>
         </div>
@@ -50,7 +52,7 @@
               <div class="text-pr">
                 <span class="w">DAYWALKERS</span>
                 <span class="re">Score</span>
-                <span id="scorePlayer" class="score">0</span>
+                <span id="scorePlayer" class="score days">0</span>
               </div>
               <div class="cont-pr">
                 <img class="player" src="assets/1-first/liza.png" alt="" />
@@ -67,7 +69,8 @@
               <div class="text-pr">
                 <span class="w">vampires</span>
                 <span class="re">Score</span>
-                <span id="scoreBot" class="score">0</span>
+                <span id="scoreBot" class="score vam">0</span>
+                <span class="vam hidden"></span>
               </div>
             </div>
           </div>
@@ -80,7 +83,7 @@
                 Final
                 <span class="o"> Score </span>
               </span>
-              <span id="scorePlayer" class="s">15</span>
+              <span id="scorePlayer" class="s days">15</span>
             </div>
           </div>
           <div class="buttons">

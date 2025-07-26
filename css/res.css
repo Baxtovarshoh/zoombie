@@ -1,8 +1,34 @@
 @media (max-width: 400px) {
-    .phone{
-        width: 100%;
-        border: none;
-        border-radius: 0;
+    body{
+        align-items: flex-start;
     }
-    
+  .phone {
+    width: 100%;
+    border: none;
+    height: 100%;
+    border-radius: 0;
+  }
+  .screen {
+    height: 100%;
+    width: 100%;
+    border-radius: 0;
+  }
+  .notch {
+    display: none;
+  }
+  .swipe {
+    display: none;
+  }
+  .text{
+    font-size: 18px;
+  }
+  .cont-persons{
+    height: 43%;
+    background: linear-gradient(to top, #000000 70%, #feb47b00);
+  }
+  .d{
+    width: 100%;
+    height: 100%;
+    top: -70px;
+  }
 }

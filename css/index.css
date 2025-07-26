@@ -2,6 +2,11 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 @font-face {
   font-family: "AlbertusNova";
@@ -80,7 +85,7 @@ body {
 }
 .vam {
   width: 40%;
-  height: 55%;
+  height: 45%;
 }
 .text {
   font-size: 20px;
@@ -241,28 +246,24 @@ body {
   height: 100%;
   transition: all 0.5 ease-in;
 }
-.daywalker {
-  width: 100px;
-  height: 100px;
-  position: relative;
-  left: 0;
-  top: 40%;
-  background: url("../assets/icon.png") top/cover no-repeat;
-}
 
-.vampire {
-  width: 100px;
-  height: 100px;
-  position: relative;
-  right: 0;
-  top: 40%;
-  background: url("../assets/vapIcon.png") top/cover no-repeat;
-}
 .daywalker,
 .vampire {
-  transition: all 0.3s ease;
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 40%;
+  transition: all 0.6s ease;
   z-index: 12;
   pointer-events: none;
+}
+.daywalker {
+  background: url("../assets/1-first/icon-daywalker.png") top/cover no-repeat;
+  right: 0;
+}
+.vampire {
+  background: url("../assets/1-first/icon-vampire.png") top/cover no-repeat;
+  left: 0;
 }
 .point {
   width: 100px;
@@ -355,7 +356,6 @@ body {
   align-items: center;
   gap: 13px;
 }
-
 
 .hidden {
   display: none;
