@@ -201,18 +201,26 @@ function moveTargetTo(x, y, who) {
 
 platform.addEventListener("click", (e) => {
   const point = e.target.closest(".point");
+  const playerTarget = vampire.classList.contains("bot-crosshair")
+    ? daywalker
+    : vampire;
   if (point) {
     const rect = point.getBoundingClientRect();
-    const playerTarget = vampire.classList.contains("bot-crosshair")
-      ? daywalker
-      : vampire;
 
     moveTargetTo(rect.x, rect.y, playerTarget);
 
     point.remove();
     playerScore++;
     updateScores();
+  } else {
+    let x = e.clientX - 50;
+    let y = e.clientY - 50;
+    moveTargetTo(x, y, playerTarget);
   }
+});
+
+platform.addEventListener("click", (e) => {
+  console.log(e.clientY);
 });
 
 let botCaughtCount = 0;
@@ -227,7 +235,7 @@ function botTryCatch(point) {
     const botTarget = document.querySelector(".bot-crosshair");
     moveTargetTo(rect.x, rect.y, botTarget);
 
-    if (botCaughtCount < 3) {
+    if (botCaughtCount < 9) {
       point.remove(); // бот удаляет фрукт
       botScore++; // и получает очко
       botCaughtCount++;
