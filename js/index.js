@@ -42,6 +42,7 @@ const platform = document.querySelector(".platform");
 const timer = document.querySelector("#time");
 const scorePlayerEl = document.querySelectorAll(".days");
 const scoreBotEl = document.querySelectorAll(".vam");
+const endScore = document.querySelector(".dayses");
 
 let selectedPlayer = "daywalker";
 let timeInterval;
@@ -258,6 +259,7 @@ function endGame() {
   clearInterval(spawnInterval);
   const allPoints = platform.querySelectorAll(".point");
   allPoints.forEach((p) => p.remove());
+  endScore.textContent = playerScore;
 
   gameBackground.classList.add("hidden");
   endCard.classList.remove("hidden");
@@ -273,6 +275,7 @@ function replay() {
   botScore = 0;
   playerScore = 0;
   botCaughtCount = 0;
+  endScore.textContent = 0;
   updateScores();
 
   const allPoints = platform.querySelectorAll(".point");
