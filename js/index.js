@@ -217,6 +217,7 @@ platform.addEventListener("click", (e) => {
     let y = e.clientY - 50;
     moveTargetTo(x, y, playerTarget);
   }
+  moveTargetTo()
 });
 
 platform.addEventListener("click", (e) => {
