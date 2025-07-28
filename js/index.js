@@ -55,6 +55,11 @@ let mutetion = true;
 let unmute = (video.muted = mutetion);
 let windowH = window.innerHeight > 400;
 let random = Math.round(Math.random());
+let initialPlayerPos = { left: 0, top: 0 };
+let initialBotPos = { left: 0, top: 0 };
+let botMoveInterval;
+let activePoints = [];
+let isBotCatching = false;
 
 video.play();
 
@@ -130,6 +135,25 @@ function ChoosePerson(name) {
   endCard.classList.add("hidden");
   gameBackground.classList.remove("hidden");
 
+  const playerTarget = vampire.classList.contains("bot-crosshair")
+    ? daywalker
+    : vampire;
+  const botTarget = vampire.classList.contains("bot-crosshair")
+    ? vampire
+    : daywalker;
+  const gameRect = platform.getBoundingClientRect();
+  const playerRect = playerTarget.getBoundingClientRect();
+  const botRect = botTarget.getBoundingClientRect();
+
+  initialPlayerPos = {
+    left: playerRect.left - gameRect.left,
+    top: playerRect.top - gameRect.top,
+  };
+  initialBotPos = {
+    left: botRect.left - gameRect.left,
+    top: botRect.top - gameRect.top,
+  };
+
   startGame();
 }
 
@@ -173,14 +197,14 @@ function spawnPoint() {
   point.style.top = `-50px`;
 
   platform.appendChild(point);
+  activePoints.push(point);
   animatePoint(point);
-  botTryCatch(point);
 }
 
 function animatePoint(point) {
   let top = -70;
   const fall = setInterval(() => {
-    top += 0.9;
+    top += 2.1;
     point.style.top = `${top}px`;
 
     if (top > window.innerHeight) {
@@ -209,58 +233,97 @@ platform.addEventListener("click", (e) => {
 
     moveTargetTo(rect.x, rect.y, playerTarget);
 
-    point.remove();
-    playerScore++;
-    updateScores();
+    setTimeout(() => {
+      playerTarget.style.left = `${initialPlayerPos.left}px`;
+      playerTarget.style.top = `${initialPlayerPos.top}px`;
+      point.remove();
+      playerScore++;
+      updateScores();
+    }, 500);
   } else {
     let x = e.clientX - 50;
     let y = e.clientY - 50;
     moveTargetTo(x, y, playerTarget);
+    setTimeout(() => {
+      playerTarget.style.left = `${initialPlayerPos.left}px`;
+      playerTarget.style.top = `${initialPlayerPos.top}px`;
+    }, 500);
   }
-  moveTargetTo()
-});
-
-platform.addEventListener("click", (e) => {
-  console.log(e.clientY);
 });
 
 let botCaughtCount = 0;
 
-function botTryCatch(point) {
-  const delay = Math.random() * 2000 + 1000;
+function botCatchLoop() {
+  if (botCaughtCount >= 6) {
+    const botTarget = document.querySelector(".bot-crosshair");
+    if (!botMoveInterval) animateCrosshair(botTarget);
+    return;
+  }
+
+  if (activePoints.length === 0 || isBotCatching) return;
+
+  const botTarget = document.querySelector(".bot-crosshair");
+  const point = activePoints[1];
+
+  if (!document.body.contains(point)) {
+    activePoints.shift();
+    return;
+  }
+
+  isBotCatching = true;
+
+  const rect = point.getBoundingClientRect();
+  moveTargetTo(rect.x - 100, rect.y - 100, botTarget);
 
   setTimeout(() => {
-    if (!document.body.contains(point)) return;
-
-    const rect = point.getBoundingClientRect();
-    const botTarget = document.querySelector(".bot-crosshair");
-    moveTargetTo(rect.x, rect.y, botTarget);
-
-    if (botCaughtCount < 9) {
-      point.remove(); // бот удаляет фрукт
-      botScore++; // и получает очко
+    if (document.body.contains(point)) {
+      point.remove();
+      botScore++;
       botCaughtCount++;
       updateScores();
     }
-    // иначе: просто двигается, но не ловит
-  }, delay);
+
+    activePoints.shift();
+    botTarget.style.left = `${initialBotPos.left}px`;
+    botTarget.style.top = `${initialBotPos.top}px`;
+
+    isBotCatching = false;
+  }, 800);
 }
 
+setInterval(botCatchLoop, 2000); // каждый 1с бот проверяет
+
 function animateCrosshair(who) {
-  const move = () => {
-    const platformRect = platform.getBoundingClientRect();
+  const platformRect = platform.getBoundingClientRect();
+  const step = 50;
+  let currentX = parseFloat(who.style.left) || 0;
+  let currentY = parseFloat(who.style.top) || 0;
 
-    const maxX = platformRect.width - 80;
-    const maxY = platformRect.height - 80;
+  // если уже работает — не запускать заново
+  if (botMoveInterval) clearInterval(botMoveInterval);
 
-    const x = Math.random() * maxX;
-    const y = Math.random() * maxY;
+  botMoveInterval = setInterval(() => {
+    const directions = ["left", "right", "up", "down"];
+    const dir = directions[Math.floor(Math.random() * directions.length)];
 
-    who.style.left = `${x}px`;
-    who.style.top = `${y}px`;
-  };
+    switch (dir) {
+      case "left":
+        currentX = Math.max(0, currentX - step);
+        break;
+      case "right":
+        currentX = Math.min(platformRect.width - 50, currentX + step);
+        break;
+      case "up":
+        currentY = Math.max(0, currentY - step);
+        break;
+      case "down":
+        currentY = Math.min(platformRect.height - 50, currentY + step);
+        break;
+    }
 
-  setInterval(move, 1000);
+    who.style.left = `${currentX}px`;
+    who.style.top = `${currentY}px`;
+  }, 800);
 }
 
 function endGame() {
@@ -289,6 +352,20 @@ function replay() {
 
   const allPoints = platform.querySelectorAll(".point");
   allPoints.forEach((p) => p.remove());
+
+  activePoints = [];
+  isBotCatching = false;
+  if (botMoveInterval) {
+    clearInterval(botMoveInterval);
+    botMoveInterval = null;
+  }
+
+  // вернуть прицелы на начальные позиции
+  daywalker.style.right = "0";
+  daywalker.style.left = "150px";
+  daywalker.style.top = `40%`;
+  vampire.style.left = "0";
+  vampire.style.top = `40%`;
 
   endCard.classList.add("hidden");
   startCont.classList.remove("hidden");
